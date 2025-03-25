@@ -1,0 +1,13 @@
+{
+  "name": "git-slice",
+  "version": "1.0.0",
+  "description": "CLI tool to pull specific slices (folders) from a Git repository.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["git", "folder", "pull", "CLI"],
+  "author": "Shawan Mandal <github@imshawan.dev>",
+  "license": "MIT"
+}
