@@ -9,7 +9,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node bin/pull-slices.js"
+    "start": "node bin/pull-slices.js",
+    "lint": "eslint . --ext .js"
   },
   "engines": {
     "node": ">=20.0.0"
@@ -30,5 +31,10 @@
     "commander": "^13.1.0",
     "shelljs": "^0.9.2",
     "simple-git": "^3.27.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.23.0",
+    "eslint": "^9.23.0",
+    "globals": "^16.0.0"
   }
 }
