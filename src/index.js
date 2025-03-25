@@ -7,7 +7,14 @@ const git = simpleGit();
 const cwd = process.cwd();
 
 /**
- * Pulls a specific folder from a remote Git repository.
+ * Pulls a specific folder from a remote Git repository into a local destination.
+ *
+ * @param {string} repoUrl - The URL of the remote Git repository.
+ * @param {string} folderPath - The path of the folder within the repository to pull.
+ * @param {string} destination - The local destination path where the folder should be copied. Defaults to the same folder path.
+ * @returns {Promise<void>} - A promise that resolves when the folder has been successfully pulled.
+ *
+ * @throws {Error} - Throws an error if the folder is not found in the repository or if there is an issue during the pull process.
  */
 export async function pullFolder(repoUrl, folderPath, destination) {
     console.log(`🔄 Pulling ${folderPath} from ${repoUrl}...`);
@@ -41,7 +48,12 @@ export async function pullFolder(repoUrl, folderPath, destination) {
 }
 
 /**
- * Pulls a folder using SVN (GitHub only)
+ * Pulls a specific folder from an SVN repository and exports it to a destination path.
+ *
+ * @param {string} repoUrl - The URL of the SVN repository.
+ * @param {string} folderPath - The path of the folder within the repository to pull.
+ * @param {string} [destination] - The destination path where the folder should be exported. Defaults to the folderPath.
+ * @throws Will exit the process if SVN is not installed.
  */
 export function pullFromSvn(repoUrl, folderPath, destination) {
     const svnUrl = repoUrl.replace("github.com", "github.com/") + `/trunk/${folderPath}`;
@@ -59,7 +71,13 @@ export function pullFromSvn(repoUrl, folderPath, destination) {
 }
 
 /**
- * Reads the config file and processes multiple folder pulls.
+ * Processes the configuration file and pulls folders from the repository.
+ *
+ * @param {string} repoUrl - The URL of the repository.
+ * @param {string} configPath - The path to the configuration file.
+ * @param {boolean} useSvn - Flag indicating whether to use SVN for pulling folders.
+ * @returns {Promise<void>} A promise that resolves when the process is complete.
+ * @throws Will exit the process with code 1 if the config file is not found or is not an array.
  */
 export async function processConfig(repoUrl, configPath, useSvn) {
     const absoluteConfigPath = path.resolve(cwd, configPath);
