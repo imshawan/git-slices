@@ -5,6 +5,7 @@ import fs from "fs";
 
 const git = simpleGit();
 const cwd = process.cwd();
+const isNT = process.platform === "win32";
 
 /**
  * Pulls a specific folder from a remote Git repository into a local destination.
@@ -36,7 +37,7 @@ export async function pullFolder(repoUrl, folderPath, destination) {
         }
 
         shell.mkdir("-p", destPath);
-        shell.cp("-R", `${sourcePath}/*`, destPath);
+        shell.cp("-R", (isNT ? sourcePath : `${sourcePath}/*`), destPath);
         console.log(`✅ Successfully pulled ${folderPath} into ${destPath}`);
 
         shell.rm("-rf", tempDir);
